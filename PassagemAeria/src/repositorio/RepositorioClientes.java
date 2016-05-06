@@ -21,8 +21,8 @@ public class RepositorioClientes {
         clientes = new ArrayList<Cliente>();
     }
 
-    public boolean addClientes(Cliente paciente) {
-        return (clientes.add(paciente));
+    public boolean addClientes(Cliente cliente) {
+        return (clientes.add(cliente));
     }
 
     public List<Cliente> getListaClientes() {
@@ -30,8 +30,8 @@ public class RepositorioClientes {
     }
 
     public boolean clienteExiste(String rg) {
-        for (Cliente paciente : clientes) {
-            if (paciente.getRg().equals(rg)) {
+        for (Cliente cliente : clientes) {
+            if (cliente.getRg().equals(rg)) {
                 return true;
             }
         }

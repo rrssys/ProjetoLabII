@@ -23,6 +23,10 @@ public class MainUI {
         listaAvioes = new RepositorioAvioes();
         listaVoos = new RepositorioVoos();
         listaVendas = new RepositorioVendas();
+        
+        
+        //listaClientes.addClientes(new Cliente('rodrigo', '1064800173', '54545454'));
+                
        
     }
 

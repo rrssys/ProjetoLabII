@@ -1,6 +1,5 @@
 package view;
 
-import java.text.ParseException;
 import model.Cliente;
 import repositorio.RepositorioClientes;
 import util.Console;
@@ -48,13 +47,9 @@ public class ClienteUI {
         } else {
             String nome = Console.scanString("Nome: ");
             String fone = Console.scanString("Fone: ");
-            //try {
-                lista.addClientes(new Cliente(nome, rg, fone));
-                System.out.println("Cliente " + nome + " cadastrado com sucesso!");
-            
-            //} catch (ParseException ex) {
-            //    System.out.println("Formato de Data inválido!");
-            //}
+            lista.addClientes(new Cliente(nome, rg, fone));
+            System.out.println("Cliente " + nome + " cadastrado com sucesso!");
+           
         }
     }
 
