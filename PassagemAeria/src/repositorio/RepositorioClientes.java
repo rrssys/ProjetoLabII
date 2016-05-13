@@ -15,22 +15,22 @@ import model.Cliente;
  */
 public class RepositorioClientes {
 
-    private List<Cliente> clientes;
+    private List<Cliente> listaClientes;
     
     public RepositorioClientes() {
-        clientes = new ArrayList<Cliente>();
+        listaClientes = new ArrayList<Cliente>();
     }
 
     public boolean addClientes(Cliente cliente) {
-        return (clientes.add(cliente));
+        return (listaClientes.add(cliente));
     }
 
     public List<Cliente> getListaClientes() {
-        return clientes;
+        return listaClientes;
     }
 
     public boolean clienteExiste(String rg) {
-        for (Cliente cliente : clientes) {
+        for (Cliente cliente : listaClientes) {
             if (cliente.getRg().equals(rg)) {
                 return true;
             }
@@ -39,7 +39,7 @@ public class RepositorioClientes {
     }
 
     public Cliente buscarCliente(String rg) {
-        for (Cliente cliente : clientes) {
+        for (Cliente cliente : listaClientes) {
             if (cliente.getRg().equals(rg)) {
                 return cliente;
            }

@@ -53,7 +53,7 @@ public class AviaoUI {
             System.out.println("Avião já existente no cadastro");
         } else {
             
-            String qtdassentos = Console.scanString("Qtd.Assentos: ");
+            int qtdassentos = Console.scanInt("Qtd.Assentos: ");
             listaAvioes.addAvioes(new Aviao(codigo, nome, qtdassentos));
             System.out.println("Avião " + nome + " cadastrado com sucesso!");
         }

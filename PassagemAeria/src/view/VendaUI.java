@@ -10,9 +10,11 @@ import java.text.ParseException;
 import model.Voo;
 import model.Aviao;
 import model.Venda;
+import model.Cliente;
 import repositorio.RepositorioVoos;
 import repositorio.RepositorioAvioes;
 import repositorio.RepositorioVendas;
+import repositorio.RepositorioClientes;
 import util.Console;
 import util.DateUtil;
 import view.menu.VendasMenu;
@@ -25,11 +27,14 @@ public class VendaUI {
     private RepositorioVendas listaVendas;
     private RepositorioVoos listaVoos;
     private RepositorioAvioes listaAvioes;
+    private RepositorioClientes listaClientes;
 
-    public VendaUI(RepositorioVendas lista0, RepositorioVoos lista, RepositorioAvioes lista2) {
-        this.listaVendas = lista0;
-        this.listaVoos = lista;
-        this.listaAvioes = lista2;
+    public VendaUI(RepositorioVendas lista1, RepositorioVoos lista2, RepositorioAvioes lista3, RepositorioClientes lista4 ) {
+        this.listaVendas = lista1;
+        this.listaVoos = lista2;
+        this.listaAvioes = lista3;
+        this.listaClientes = lista4;
+        
     }
 
     public void executar() {
@@ -55,22 +60,35 @@ public class VendaUI {
     }
 
     private void cadastrarVendas() {
-        String origem = Console.scanString("Origem: ");
-        String destino = Console.scanString("Destino: ");
+        /*
+        - Venda de passagens: registra uma venda, 
+                              relacionando o cliente, 
+                              vôo e horário da compra, 
+                              realizando o controle da quantidade de assentos.
+        */
+
+        new ClienteUI(listaClientes).mostrarClientes();
+        String rg = Console.scanString("RG Cliente: ");
+        Cliente cliente = listaClientes.buscarCliente(rg);
+        
+        new VooUI(listaVoos, listaAvioes ).mostrarVoos();
+        int nvoo = Console.scanInt("Codigo Voo: ");
+        Voo voo = listaVoos.buscarVoo(nvoo);
+        
         String dataString = Console.scanString("Data DD/MM/AAAA: ");
         String horario = Console.scanString("Horario HH:MM : ");
-        mostrarAvioes();
-        int codaviao = Console.scanInt("Avião Codigo: ");
+        
+        int qtdpassagem = Console.scanInt("Qtd.Passagem: ");
         try {
-            if (listaVendas.buscarVendaPorParametros(origem, destino, DateUtil.stringToDate(dataString), horario, codaviao)!=null) {
+            if (listaVendas.buscarVendaPorParametros(cliente, voo, DateUtil.stringToDate(dataString), horario )!=null) {
                 System.out.println("Venda já existente no cadastro");
-            } else if ( !listaAvioes.aviaoExiste(codaviao) ) {    
-                System.out.println("Aviao não existente no cadastro");
+            
             } else {
                 
                 try {
-                    listaVendas.addVendas(new Venda( origem, destino, DateUtil.stringToDate(dataString), horario, codaviao));
-                    System.out.println("Venda " + origem + " cadastrado com sucesso!");
+                    listaVendas.addVendas(new Venda( cliente, voo, DateUtil.stringToDate(dataString), horario, qtdpassagem ));
+                    listaAvioes.LancaVendaPassagem(voo.getAviao().getCodigo(), qtdpassagem);
+                    System.out.println("Venda do Cliente: " + cliente.getNome() + " cadastrado com sucesso!");
                     
                 } catch (ParseException ex) {
                     System.out.println("Formato de Data inválido!");
@@ -85,18 +103,18 @@ public class VendaUI {
     public void mostrarVendas() {
         System.out.println("-----------------------------\n");
         System.out.println(String.format("%-10s", "CÓDIGO") + "\t"
-                + String.format("%-20s", "|ORIGEM") + "\t"
-                + String.format("%-20s", "|DESTINO") + "\t"
+                + String.format("%-20s", "|CLIENTE") + "\t"
+                + String.format("%-40s", "|VOO") + "\t"
                 + String.format("%-20s", "|DATA") + "\t"
                 + String.format("%-20s", "|HORARIO") + "\t"
-                + String.format("%-20s", "|AVIAO"));
+                + String.format("%-20s", "|QTD.ASSENTOS"));
         for (Venda venda : listaVendas.getListaVendas()) {
            System.out.println(String.format("%-10s", venda.getCodigo()) + "\t"
-                    + String.format("%-20s", "|" + venda.getOrigem()) + "\t"
-                    + String.format("%-20s", "|" + venda.getDestino()) + "\t"
+                    + String.format("%-20s", "|" + venda.getCliente().getNome()) + "\t"
+                    + String.format("%-40s", "|" + venda.getVoo().getOrigem() +"/"+ venda.getVoo().getDestino()  ) + "\t"
                     + String.format("%-20s", "|" + DateUtil.dateToString(venda.getData()) ) + "\t"
                     + String.format("%-20s", "|" + venda.getHorario()) + "\t"
-                    + String.format("%-20s", "|" + listaAvioes.buscarAviao( venda.getAviaoCodigo() ).getNome() ));
+                    + String.format("%-20s", "|" + venda.getQtdpassagem() ));
         }
 
     } 

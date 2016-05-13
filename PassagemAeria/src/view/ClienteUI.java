@@ -3,7 +3,6 @@ package view;
 import model.Cliente;
 import repositorio.RepositorioClientes;
 import util.Console;
-//import util.DateUtil;
 import view.menu.ClientesMenu;
 
 /**
@@ -12,10 +11,10 @@ import view.menu.ClientesMenu;
  */
 public class ClienteUI {
 
-    private RepositorioClientes lista;
+    private RepositorioClientes listaClientes;
 
     public ClienteUI(RepositorioClientes lista) {
-        this.lista = lista;
+        this.listaClientes = lista;
     }
 
     public void executar() {
@@ -42,12 +41,12 @@ public class ClienteUI {
 
     private void cadastrarCliente() {
         String rg = Console.scanString("RG: ");
-        if (lista.clienteExiste(rg)) {
+        if (listaClientes.clienteExiste(rg)) {
             System.out.println("RG já existente no cadastro");
         } else {
             String nome = Console.scanString("Nome: ");
             String fone = Console.scanString("Fone: ");
-            lista.addClientes(new Cliente(nome, rg, fone));
+            listaClientes.addClientes(new Cliente(nome, rg, fone));
             System.out.println("Cliente " + nome + " cadastrado com sucesso!");
            
         }
@@ -59,7 +58,7 @@ public void mostrarClientes() {
         System.out.println(String.format("%-10s", "RG") + "\t"
                 + String.format("%-20s", "|NOME") + "\t"
                 + String.format("%-20s", "|FONE"));
-        for (Cliente cliente : lista.getListaClientes()) {
+        for (Cliente cliente : listaClientes.getListaClientes()) {
             System.out.println(String.format("%-10s", cliente.getRg()) + "\t"
                     + String.format("%-20s", "|" + cliente.getNome()) + "\t"
                     + String.format("%-20s", "|" + cliente.getFone() ));

@@ -9,8 +9,8 @@ package repositorio;
 import java.util.ArrayList;
 import java.util.List;
 import model.Voo;
+import model.Aviao;
 import java.util.Date;
-import util.Convercoes;
 
 /**
  *
@@ -31,6 +31,9 @@ public class RepositorioVoos {
         return listaVoos;
     }
 
+  
+    
+    
     public boolean vooExiste(int codigo) {
         for (Voo voo : listaVoos) {
             if (voo.getCodigo()==codigo) {
@@ -49,14 +52,14 @@ public class RepositorioVoos {
         return null;
     } 
     
-    public Voo buscarVooPorParametros(String origem, String destino, Date data, String horario, int codaviao) {
+    public Voo buscarVooPorParametros(String origem, String destino, Date data, String horario, Aviao aviao) {
         
         for (Voo voo : listaVoos) {
             if (voo.getOrigem().equals(origem) &&
                 voo.getDestino().equals(destino) &&
                 voo.getData().equals(data) && 
                 voo.getHorario().equals(horario) &&
-                Convercoes.convertToString(voo.getAviaoCodigo()).equals(Convercoes.convertToString(codaviao)) ) {
+                voo.getAviao().equals(aviao) ) {
                 return voo;
            }
         }

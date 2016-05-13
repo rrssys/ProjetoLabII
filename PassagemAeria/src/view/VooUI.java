@@ -55,17 +55,19 @@ public class VooUI {
         String destino = Console.scanString("Destino: ");
         String dataString = Console.scanString("Data DD/MM/AAAA: ");
         String horario = Console.scanString("Horario HH:MM : ");
-        mostrarAvioes();
+        new AviaoUI(listaAvioes).mostrarAvioes();
         int codaviao = Console.scanInt("Avião Codigo: ");
+        Aviao aviao = listaAvioes.buscarAviao(codaviao);
+        
         try {
-            if (listaVoos.buscarVooPorParametros(origem, destino, DateUtil.stringToDate(dataString), horario, codaviao)!=null) {
+            if (listaVoos.buscarVooPorParametros(origem, destino, DateUtil.stringToDate(dataString), horario, aviao)!=null) {
                 System.out.println("Voo já existente no cadastro");
             } else if ( !listaAvioes.aviaoExiste(codaviao) ) {    
                 System.out.println("Aviao não existente no cadastro");
             } else {
                 
                 try {
-                    listaVoos.addVoos(new Voo( origem, destino, DateUtil.stringToDate(dataString), horario, codaviao));
+                    listaVoos.addVoos(new Voo( origem, destino, DateUtil.stringToDate(dataString), horario, aviao));
                     System.out.println("Voo " + origem + " cadastrado com sucesso!");
                     
                 } catch (ParseException ex) {
@@ -92,23 +94,9 @@ public class VooUI {
                     + String.format("%-20s", "|" + voo.getDestino()) + "\t"
                     + String.format("%-20s", "|" + DateUtil.dateToString(voo.getData()) ) + "\t"
                     + String.format("%-20s", "|" + voo.getHorario()) + "\t"
-                    + String.format("%-20s", "|" + listaAvioes.buscarAviao( voo.getAviaoCodigo() ).getNome() ));
+                    + String.format("%-20s", "|" + voo.getAviao().getNome() ));
         }
 
     } 
-    
-    public void mostrarAvioes() {
-        System.out.println("-----------------------------\n");
-        System.out.println(String.format("%-10s", "CÓDIGO") + "\t"
-                + String.format("%-20s", "|NOME") + "\t"
-                + String.format("%-20s", "|QTD.ASSENTOS"));
-        for (Aviao aviao : listaAvioes.getListaAvioes()) {
-            System.out.println(String.format("%-10s", aviao.getCodigo()) + "\t"
-                    + String.format("%-20s", "|" + aviao.getNome()) + "\t"
-                    + String.format("%-20s", "|" + aviao.getAssentos()));
-        }
-
-    }    
-    
     
 }

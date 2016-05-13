@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Date;
+
 /**
  *
  * @author rrsantos
@@ -8,22 +9,38 @@ import java.util.Date;
 public class Venda {
     private static int CODIGO_GERADO=1;
     private int codigo;
-    private String origem;
-    private String destino;
+    private Cliente cliente;
+    private Voo voo;
     private Date data;
     private String horario;
-    private int codaviao; 
+    private int qtdpassagem; 
 
-    
-    public Venda(String origem, String destino, Date data, String horario, int codaviao ) {
+
+    public Venda(Cliente cliente, Voo voo , Date data, String horario, int qtdpassagem ) {
         this.codigo = generateCodigo();
-        this.origem = origem;
-        this.destino = destino;
+        this.cliente = cliente;
+        this.voo = voo;
         this.data = data;
         this.horario = horario;
-        this.codaviao = codaviao;
+        this.qtdpassagem = qtdpassagem;
     }
-    
+        
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Voo getVoo() {
+        return voo;
+    }
+
+    public void setVoo(Voo voo) {
+        this.voo = voo;
+    }
+            
     public int getCodigo() {
         return codigo;
     }
@@ -31,24 +48,8 @@ public class Venda {
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
-    
-    public String getOrigem() {
-        return origem;
-    }
-
-    public void setOrigem(String origem) {
-        this.origem = origem;
-    }
-
-    public String getDestino() {
-        return destino;
-    }
-
-    public void setDestino(String destino) {
-        this.destino = destino;
-    }
-   
-    public void setData(Date data) {
+  
+      public void setData(Date data) {
         this.data = data;
     }
 
@@ -62,16 +63,17 @@ public class Venda {
 
     public String getHorario() {
         return horario;
-    }
+    }    
     
-    public void setAviaoCodigo(int aviaocodigo) {
-        this.codaviao = aviaocodigo;
+    
+    public int getQtdpassagem() {
+        return qtdpassagem;
     }
 
-    public int getAviaoCodigo() {
-        return codaviao;
+    public void setQtdpassagem(int qtdpassagem) {
+        this.qtdpassagem = qtdpassagem;
     }
-    
+        
     private int generateCodigo(){
         return(CODIGO_GERADO++);
     }    

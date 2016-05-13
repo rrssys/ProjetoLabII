@@ -8,9 +8,9 @@ package model;
 public class Aviao {
     private int codigo;
     private String nome;
-    private String qtdassentos;
+    private int qtdassentos;
 
-    public Aviao(int codigo, String nome, String qtdassentos) {
+    public Aviao(int codigo, String nome, int qtdassentos) {
         this.codigo = codigo;
         this.nome = nome;
         this.qtdassentos = qtdassentos;
@@ -32,11 +32,11 @@ public class Aviao {
         this.nome = nome;
     }
 
-    public String getAssentos() {
+    public int getAssentos() {
         return qtdassentos;
     }
 
-    public void setAssentos(String assentos) {
+    public void setAssentos(int assentos) {
         this.qtdassentos = assentos;
     }
     

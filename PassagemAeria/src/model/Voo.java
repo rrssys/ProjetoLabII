@@ -12,16 +12,15 @@ public class Voo {
     private String destino;
     private Date data;
     private String horario;
-    private int codaviao; 
-
-    
-    public Voo(String origem, String destino, Date data, String horario, int codaviao ) {
+    private Aviao aviao;
+      
+    public Voo(String origem, String destino, Date data, String horario, Aviao aviao ) {
         this.codigo = generateCodigo();
         this.origem = origem;
         this.destino = destino;
         this.data = data;
         this.horario = horario;
-        this.codaviao = codaviao;
+        this.aviao = aviao;
     }
     
     public int getCodigo() {
@@ -64,12 +63,12 @@ public class Voo {
         return horario;
     }
     
-    public void setAviaoCodigo(int aviaocodigo) {
-        this.codaviao = aviaocodigo;
+    public void setAviao(Aviao aviao) {
+        this.aviao = aviao;
     }
 
-    public int getAviaoCodigo() {
-        return codaviao;
+    public Aviao getAviao() {
+        return aviao;
     }
     
     private int generateCodigo(){

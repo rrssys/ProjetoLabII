@@ -29,6 +29,16 @@ public class RepositorioAvioes {
         return listaAvioes;
     }
 
+    public void LancaVendaPassagem(int codigo, int qtdpassagemv) {
+        for (Aviao aviao : listaAvioes) {
+            if (aviao.getCodigo()==codigo) {
+                aviao.setAssentos( aviao.getAssentos() - qtdpassagemv );
+                
+           }
+        }
+        //return null;
+    } 
+    
     public boolean aviaoExiste(int codigo) {
         for (Aviao aviao : listaAvioes) {
             if (aviao.getCodigo()==codigo) {

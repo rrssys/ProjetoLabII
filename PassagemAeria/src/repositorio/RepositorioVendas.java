@@ -9,6 +9,8 @@ package repositorio;
 import java.util.ArrayList;
 import java.util.List;
 import model.Venda;
+import model.Cliente;
+import model.Voo;
 import java.util.Date;
 import util.Convercoes;
 
@@ -49,20 +51,26 @@ public class RepositorioVendas {
         return null;
     } 
     
-    public Venda buscarVendaPorParametros(String origem, String destino, Date data, String horario, int codaviao) {
+ 
+    
+    
+      
+    public Venda buscarVendaPorParametros( Cliente cliente, Voo voo, Date data, String horario ) {
         
         for (Venda venda : listaVendas) {
-            if (venda.getOrigem().equals(origem) &&
-                venda.getDestino().equals(destino) &&
+            if (venda.getCliente().equals(cliente) &&
+                venda.getVoo().equals(voo) &&
                 venda.getData().equals(data) && 
-                venda.getHorario().equals(horario) &&
-                Convercoes.convertToString(venda.getAviaoCodigo()).equals(Convercoes.convertToString(codaviao)) ) {
+                venda.getHorario().equals(horario) ) {
                 return venda;
            }
         }
+          
         return null;
+
+
     } 
     
- 
+    
     
 }
