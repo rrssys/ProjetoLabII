@@ -36,6 +36,7 @@ public class MainUI {
         listaAvioes.addAvioes(new Aviao( 1, "TAM",     100  ));
         listaAvioes.addAvioes(new Aviao( 2, "GOL",     150  ));
         listaAvioes.addAvioes(new Aviao( 3, "AVIANCA", 125  ));
+     
         
     }
 
