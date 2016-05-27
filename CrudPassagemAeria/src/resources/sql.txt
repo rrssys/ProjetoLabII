@@ -1,0 +1,47 @@
+/*Criação do Banco:*/
+create database lp2_passagemaeria;
+
+/*Criação da Tabela*/
+create table cliente (
+id serial primary key,
+rg varchar(15),
+nome varchar(50),
+fone varchar(30)
+);
+
+/*Criação da Tabela*/
+create table aviao (
+id serial primary key,
+codigo integer,
+nome varchar(50),
+qtdassentos integer
+);
+
+/*Criação da Tabela*/
+create table voo (
+id serial primary key,
+codigo integer,
+origem varchar(50),
+destino varchar(50),
+data_voo date,
+horario varchar(5),
+id_aviao integer,
+qtdassentos integer
+);
+
+/*Criação da Tabela*/
+create table venda (
+id serial primary key,
+id_cliente integer,
+id_voo integer,
+data_venda date,
+horario varchar(5),
+qtdassentos integer
+);
+
+
+
+DELETE FROM cliente;
+ALTER SEQUENCE cliente_id_seq RESTART WITH 1;
+
+SELECT * FROM cliente;
